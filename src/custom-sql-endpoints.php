@@ -5,7 +5,7 @@
  * @package           CustomSQLEndpoints
  * @author            Marcel Oomens
  * @copyright         2024 Zamaneh Media Foundation
- * @license           ISC
+ * @license           MIT
  *
  * @wordpress-plugin
  * Plugin Name:       Custom SQL Endpoints
@@ -17,7 +17,13 @@
  * Author:            Marcel Oomens
  * Author URI:        https://451.tools
  * Text Domain:       plugin-slug
- * License:           ICS
- * - License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
- * - Update URI:        https://example.com/my-plugin/
+ * License:           MIT
+ * License URI:       https://spdx.org/licenses/MIT.html
+ * Update URI:        https://example.com/my-plugin/
  */
+ 
+const NAMESPACE = 'custom_sql';
+
+\add_action( 'rest_api_init', function() {
+	
+} );
