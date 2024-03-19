@@ -49,7 +49,7 @@ define( 'CUSTOM_NAMESPACE', 'custom-sql/v1' );
             
             $result = $wpdb->get_results( $wpdb->prepare( $query ), ARRAY_N );
             
-            return array( $wpdb->last_query, $result );
+            return array( $result );
         },
         'permission_callback' => '__return_true'
     ) );
