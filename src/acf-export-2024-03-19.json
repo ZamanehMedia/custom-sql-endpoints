@@ -1,0 +1,163 @@
+[
+    {
+        "key": "group_65f8750e3286a",
+        "title": "Custom SQL endpoints",
+        "fields": [
+            {
+                "key": "field_65f8b0cd424d6",
+                "label": "Custom endpoints",
+                "name": "custom_sql_endpoints",
+                "aria-label": "",
+                "type": "repeater",
+                "instructions": "Create custom SQL endpoints for use with headless build pipelines (for example).",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "layout": "block",
+                "pagination": 0,
+                "min": 0,
+                "max": 0,
+                "collapsed": "field_65f8b10c424d7",
+                "button_label": "Add custom SQL endpoint",
+                "rows_per_page": 20,
+                "sub_fields": [
+                    {
+                        "key": "field_65f8b14f424d8",
+                        "label": "User",
+                        "name": "custom_endpoint_user",
+                        "aria-label": "",
+                        "type": "user",
+                        "instructions": "Restrict the use of this endpoint to one or more users (authenticated requests only). If \"User\" is empty, then the endpoint can be used when unauthenticated.",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "role": [
+                            "editor",
+                            "administrator"
+                        ],
+                        "return_format": "id",
+                        "multiple": 1,
+                        "translations": "ignore",
+                        "allow_null": 0,
+                        "bidirectional": 0,
+                        "bidirectional_target": [],
+                        "parent_repeater": "field_65f8b0cd424d6"
+                    },
+                    {
+                        "key": "field_65f8b10c424d7",
+                        "label": "Slug",
+                        "name": "custom_endpoint_slug",
+                        "aria-label": "",
+                        "type": "text",
+                        "instructions": "Custom endpoint slug. The endpoint will be made available at `\/wp-json\/custom-sql\/v1\/$slug`",
+                        "required": 1,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "default_value": "",
+                        "translations": "ignore",
+                        "maxlength": "",
+                        "placeholder": "",
+                        "prepend": "\/wp-json\/custom-sql\/v1\/",
+                        "append": "",
+                        "parent_repeater": "field_65f8b0cd424d6"
+                    },
+                    {
+                        "key": "field_65f8750fe4cb1",
+                        "label": "SQL query",
+                        "name": "custom_sql_query",
+                        "aria-label": "",
+                        "type": "textarea",
+                        "instructions": "Enter your custom SQL query. The plugin does not do any validation so please validate your query on an SQL cli, with a tool like phpMyAdmin, or something similar. You can use placeholders (`{placeholder_key}`) in your query. These placeholders will be replaced as is with the value of the query string parameter of the same name.",
+                        "required": 1,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "default_value": "",
+                        "translations": "ignore",
+                        "maxlength": "",
+                        "rows": "",
+                        "placeholder": "",
+                        "new_lines": "",
+                        "parent_repeater": "field_65f8b0cd424d6"
+                    },
+                    {
+                        "key": "field_65f8b192424d9",
+                        "label": "Enabled",
+                        "name": "custom_endpoint_enabled",
+                        "aria-label": "",
+                        "type": "true_false",
+                        "instructions": "Allows you to disable (but not delete) a configured endpoint.",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "message": "",
+                        "default_value": 1,
+                        "translations": "ignore",
+                        "ui_on_text": "On",
+                        "ui_off_text": "Off",
+                        "ui": 1,
+                        "parent_repeater": "field_65f8b0cd424d6"
+                    }
+                ]
+            }
+        ],
+        "location": [
+            [
+                {
+                    "param": "options_page",
+                    "operator": "==",
+                    "value": "custom-sql-endpoints"
+                }
+            ]
+        ],
+        "menu_order": 0,
+        "position": "normal",
+        "style": "seamless",
+        "label_placement": "top",
+        "instruction_placement": "label",
+        "hide_on_screen": "",
+        "active": true,
+        "description": "Create custom SQL endpoints for use with headless build pipelines (for example).",
+        "show_in_rest": 0
+    },
+    {
+        "key": "ui_options_page_65f8749b345a4",
+        "title": "Custom SQL endpoints",
+        "active": true,
+        "menu_order": 0,
+        "page_title": "Custom SQL endpoints",
+        "menu_slug": "custom-sql-endpoints",
+        "parent_slug": "tools.php",
+        "advanced_configuration": 1,
+        "icon_url": "",
+        "menu_title": "Custom SQL",
+        "position": "",
+        "redirect": false,
+        "description": "Create custom SQL endpoints for use with headless build pipelines (for example).",
+        "update_button": "Update",
+        "updated_message": "Options Updated",
+        "capability": "edit_posts",
+        "data_storage": "options",
+        "post_id": "",
+        "autoload": 1
+    }
+]
