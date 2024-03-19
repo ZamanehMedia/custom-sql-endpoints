@@ -25,33 +25,46 @@
 define( 'CUSTOM_NAMESPACE', 'custom-sql/v1' );
 
 \add_action( 'rest_api_init', function() {
-	
-    \register_rest_route( CUSTOM_NAMESPACE, '/signature-distribution', array(
-        'methods' => 'GET',
-        'callback' => function ( \WP_REST_Request $request ) {
-            
-            global $wpdb;
-            $wpdb->show_errors();
-            
-            $params = $request->get_params();
-            
-            $query = "SELECT m.meta_value, count(*) FROM wp_comments AS c INNER JOIN wp_commentmeta AS m ON c.comment_ID = m.comment_id WHERE c.comment_post_ID IN ({petitions}) AND m.meta_key = 'dk_signature_location' GROUP BY m.meta_value";
-            
-            if (preg_match('/{(.+)}/', $query, $matches)) {
-               for ($i=1; $i<count($matches); $i++) {
-                    if (array_key_exists($matches[$i], $params)) {
-                       $query = preg_replace("/{{$matches[$i]}}/", \esc_sql($params[$matches[$i]]), $query);
-                    } else {
-                        // emit missing parameter error
-                    }
-               } 
-            }        
-            
-            $result = $wpdb->get_results( $wpdb->prepare( $query ), ARRAY_N );
-            
-            return array( $result );
-        },
-        'permission_callback' => '__return_true'
-    ) );
+	 
+    if( function_exists('\have_rows') && \have_rows('custom_sql_endpoints', 'options') ) {
     
+        while( \have_rows('custom_sql_endpoints', 'options') ) : \the_row();
+    
+            if ( \get_sub_field('custom_endpoint_enabled') ) {
+                
+                $users = \get_sub_field('custom_endpoint_user');
+                $slug = \get_sub_field('custom_endpoint_slug');
+                $query = \get_sub_field('custom_sql_query');
+                
+                \register_rest_route( CUSTOM_NAMESPACE, '/'.$slug, array(
+                    'methods' => 'GET',
+                    'callback' => function ( \WP_REST_Request $request ) use ($slug, $query)  {             
+                        global $wpdb;
+                        $wpdb->show_errors();
+                        
+                        $params = $request->get_params();
+                        
+                        if (preg_match('/{(.+)}/', $query, $matches)) {
+                           for ($i=1; $i<count($matches); $i++) {
+                                if (array_key_exists($matches[$i], $params)) {
+                                   $query = preg_replace("/{{$matches[$i]}}/", \esc_sql($params[$matches[$i]]), $query);
+                                } else {
+                                    // emit missing parameter error
+                                }
+                           } 
+                        }        
+                        
+                        return $wpdb->get_results( $wpdb->prepare( $query ), ARRAY_N );
+                    },
+                    'permission_callback' => function() use ($users) {
+                        return $users ? in_array(\get_current_user_id(), $users) : true;
+                    }
+                ) );
+                
+            }
+    
+        endwhile;
+
+    }
+        
 } );
