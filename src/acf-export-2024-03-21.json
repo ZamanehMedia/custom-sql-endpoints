@@ -74,6 +74,36 @@
                         "parent_repeater": "field_65f8b0cd424d6"
                     },
                     {
+                        "key": "field_65f9812f009ed",
+                        "label": "Format",
+                        "name": "custom_endpoint_format",
+                        "aria-label": "",
+                        "type": "select",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "choices": {
+                            "ARRAY_A": "ARRAY_A",
+                            "ARRAY_N": "ARRAY_N",
+                            "OBJECT": "OBJECT",
+                            "OBJECT_K": "OBJECT_K"
+                        },
+                        "default_value": "OBJECT",
+                        "return_format": "value",
+                        "multiple": 0,
+                        "translations": "ignore",
+                        "allow_null": 0,
+                        "ui": 0,
+                        "ajax": 0,
+                        "placeholder": "",
+                        "parent_repeater": "field_65f8b0cd424d6"
+                    },
+                    {
                         "key": "field_65f8750fe4cb1",
                         "label": "SQL query",
                         "name": "custom_sql_query",

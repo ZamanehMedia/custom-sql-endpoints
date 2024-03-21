@@ -34,11 +34,12 @@ define( 'CUSTOM_NAMESPACE', 'custom-sql/v1' );
                 
                 $users = \get_sub_field('custom_endpoint_user');
                 $slug = \get_sub_field('custom_endpoint_slug');
+                $format = \get_sub_field('custom_endpoint_format');
                 $query = \get_sub_field('custom_sql_query');
                 
                 \register_rest_route( CUSTOM_NAMESPACE, '/'.$slug, array(
                     'methods' => 'GET',
-                    'callback' => function ( \WP_REST_Request $request ) use ($slug, $query)  {             
+                    'callback' => function ( \WP_REST_Request $request ) use ($slug, $format, $query)  {             
                         global $wpdb;
                         $wpdb->show_errors();
                         
@@ -54,7 +55,7 @@ define( 'CUSTOM_NAMESPACE', 'custom-sql/v1' );
                            } 
                         }        
                         
-                        return $wpdb->get_results( $wpdb->prepare( $query ), ARRAY_N );
+                        return $wpdb->get_results( $wpdb->prepare( $query ), $format );
                     },
                     'permission_callback' => function() use ($users) {
                         return $users ? in_array(\get_current_user_id(), $users) : true;
